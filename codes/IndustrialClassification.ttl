@@ -7,7 +7,7 @@
 
 # Instances
 # _________
-
+ 
 idsc:AGRICULTURE_FORESTRY_AND_FISHING a ids:IndustrialClassificationISIC;
     rdfs:label "Agriculture forestry and fishing".
 
