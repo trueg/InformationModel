@@ -22,9 +22,7 @@
                 "@value": "?startDateTime",                   // ?startDateTime < ?endDateTime
                 "@type": "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
             }
-        ],
-        "ids:constraint": [
-          {
+        }, {
             "@type:" "ids:Constraint",
             "ids:leftOperand": { "@id": "idsc:POLICY_EVALUATION_TIME" },
             "ids:operator": { "@id": "idsc:BEFORE" },
