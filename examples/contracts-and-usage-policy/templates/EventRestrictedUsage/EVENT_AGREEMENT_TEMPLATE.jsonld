@@ -18,10 +18,10 @@
             "ids:leftOperand": {
               "@id": "idsc:EVENT"
             },
-            "ids:operator": { "@id": "idsc:EQUALS" },             // if pipReturnValue == true --> Constraint is staisfied
+            "ids:operator": { "@id": "idsc:SAME_AS" },             // if pipReturnValue == true --> Constraint is staisfied
             "ids:rightOperand": {
                 "@value": "?eventUri",
-                "@type": "xsd:anyURI"
+                "@type": "http://www.w3.org/2001/XMLSchema#anyURI"
             },
             "ids:pipEndpoint": { "@id": "?askIfEventPipUri" }   // the pip receives one parameter (?eventUri) and returns boolean
         }]
