@@ -35,7 +35,15 @@
               ( "ids:assigner": (idsc:PARTICIPANT_TEMPLATE),           // same value as ids:provider
                 "ids:assignee": (idsc:PARTICIPANT_TEMPLATE), )         // same value as ids:consumer
             )
-            "ids:action": { "@id": "idsc:LOG" }
+            "ids:action": {
+        				"ids:includedIn": "idsc:LOG",
+        				"ids:actionRefinement": [{
+                  "@type": "ids:Constraint",
+                  "ids:leftOperand": "idsc:SYSTEM_DEVICE",
+                  "ids:operator": "idsc:DEFINES_AS",
+                  "ids:rightOperand": { "@value": "?LoggingEndpointUri", "@type": "http://www.w3.org/2001/XMLSchema#anyURI"}
+                }]
+            }
         }
         (, "ids:constraint": (idsc:CONSTRAINT_TEMPLATE) )*        // zero or more Constraints
         (, "ids:preDuty": (idsc:OBLIGATION_TEMPLATE) )*     // zero or more Obligations which need to be fulfilled before the Usage event
