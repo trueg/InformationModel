@@ -1,0 +1,37 @@
+{
+  "result" : [ {
+    "cancelled" : true,
+    "cause" : "Broken down vehicle",
+    "heading" : 42.2,
+    "location" : [ [ 42.2 ] ],
+    "trace" : [ [ 42.2 ] ],
+    "ts" : 42,
+    "uuid" : "123456789"
+  } , {
+    "cancelled" : true,
+    "cause" : "Vehicle accident",
+    "heading" : 42.2,
+    "location" : [ [ 42.2 ] ],
+    "trace" : [ [ 42.2 ] ],
+    "ts" : 42,
+    "uuid" : "523456789"
+  } , {
+    "cancelled" : true,
+    "cause" : "Slippery road",
+    "heading" : 42.2,
+    "location" : [ [ 42.2 ] ],
+    "trace" : [ [ 42.2 ] ],
+    "ts" : 42,
+    "uuid" : "623456789"
+  } , {
+    "cancelled" : true,
+    "cause" : "Heavy rain",
+    "heading" : 42.2,
+    "location" : [ [ 42.2 ] ],
+    "trace" : [ [ 42.2 ] ],
+    "ts" : 42,
+    "uuid" : "323456789"
+  }
+  ],
+  "next_page_token" : "string"
+}

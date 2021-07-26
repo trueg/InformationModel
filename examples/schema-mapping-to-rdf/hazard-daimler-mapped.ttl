@@ -1,0 +1,33 @@
+@prefix drmh: <https://datenraummobilitaet.de/model/hazard/v1#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:hazards:daimler:hazard:123456789> a drmh:Hazard;
+  drmh:confidence "100";
+  drmh:direction <urn:hazards:daimler:heading:123456789>;
+  drmh:hazardType drmh:BrokenDownVehicle .
+
+<urn:hazards:daimler:hazard:323456789> a drmh:Hazard;
+  drmh:confidence "100";
+  drmh:direction <urn:hazards:daimler:heading:323456789>;
+  drmh:hazardType drmh:ExceptionalConditionPrecipitation .
+
+<urn:hazards:daimler:hazard:523456789> a drmh:Hazard;
+  drmh:confidence "100";
+  drmh:direction <urn:hazards:daimler:heading:523456789> .
+
+<urn:hazards:daimler:hazard:623456789> a drmh:Hazard;
+  drmh:confidence "100";
+  drmh:direction <urn:hazards:daimler:heading:623456789>;
+  drmh:hazardType drmh:SlipperyRoad .
+
+<urn:hazards:daimler:heading:123456789> a drmh:Heading;
+  drmh:headingDegree "42.2"^^xsd:integer .
+
+<urn:hazards:daimler:heading:323456789> a drmh:Heading;
+  drmh:headingDegree "42.2"^^xsd:integer .
+
+<urn:hazards:daimler:heading:523456789> a drmh:Heading;
+  drmh:headingDegree "42.2"^^xsd:integer .
+
+<urn:hazards:daimler:heading:623456789> a drmh:Heading;
+  drmh:headingDegree "42.2"^^xsd:integer .

@@ -1,0 +1,280 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ids: <https://w3id.org/idsa/core/> .
+@prefix idse: <https://w3id.org/idsa/ext/> .
+@prefix mbh: <https://www.daimler.com/drm/hazards#> .
+@prefix mbhs: <https://www.daimler.com/drm/hazards/shapes#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#>.
+@prefix rml: <http://semweb.mmlab.be/ns/rml#>.
+@prefix ql: <http://semweb.mmlab.be/ns/ql#>.
+@prefix drm: <https://datenraummobilitaet.de/model/core/v1#> .
+@prefix drmh: <https://datenraummobilitaet.de/model/hazard/v1#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+
+{
+  <https://www.iana.org/assignments/media-types/application/json> a ids:IANAMediaType .
+}
+
+drmh: {
+  drmh:Hazard a owl:Class ;
+    rdfs:label "Hazard"@en .
+
+  drmh:HazardType a owl:Class ;
+    rdfs:label "Hazard Type"@en .
+
+  drmh:Obstruction a drmh:HazardType ;
+    drmh:sensorisId "OBSTRUCTION"^^xsd:string ;
+    rdfs:comment "Obstruction such as fallen trees, parts of tires etc. (TPEG-TEC 10.0). Can be defined in more detail within the message RoadObstructionCondition."@en .
+
+  drmh:Accident a drmh:HazardType ;
+    drmh:sensorisId "ACCIDENT"^^xsd:string ;
+    rdfs:comment """Accident (TPEG-TEC 2.0)."""@en .
+
+  drmh:BrokenDownVehicle a drmh:HazardType ;
+    drmh:sensorisId "BROKEN_DOWN_VEHICLE"^^xsd:string ;
+    rdfs:comment """Vehicle breakdown of ego vehicle or any similar event of ego vehicle stopped on the road, that might pose a risk to other road users."""@en .
+
+  drmh:SlowVehicle a drmh:HazardType ;
+    drmh:sensorisId "SLOW_VEHICLE"^^xsd:string ;
+    rdfs:comment """Very slow vehicle, e.g. agriculture vehicles, road service vehicles, grass cutters etc. (TPEG-TEC 16.0)."""@en .
+
+  drmh:WrongWayVehicle a drmh:HazardType ;
+    drmh:sensorisId "WRONG_WAY_VEHICLE"^^xsd:string ;
+    rdfs:comment """Vehicle driving opposite the allowed direction of travel (TPEG-TEC 14.0)."""@en .
+
+  drmh:Roadworks a drmh:HazardType ;
+    drmh:sensorisId "ROADWORKS"^^xsd:string ;
+    rdfs:comment """Roadworks (TPEG-TEC 3.0)."""@en .
+
+  drmh:SlipperyRoad a drmh:HazardType ;
+    drmh:sensorisId "SLIPPERY_ROAD"^^xsd:string ;
+    rdfs:comment """Slippery road."""@en .
+
+  drmh:PeopleThrowingObjects a drmh:HazardType ;
+    drmh:sensorisId "PEOPLE_THROWING_OBJECTS"^^xsd:string ;
+    rdfs:comment """People throwing objects."""@en .
+
+  drmh:VehicleOnFire a drmh:HazardType ;
+    drmh:sensorisId "VEHICLE_ON_FIRE"^^xsd:string ;
+    rdfs:comment """Vehicle on fire."""@en .
+
+  drmh:StationaryVehicle a drmh:HazardType ;
+    drmh:sensorisId "STATIONARY_VEHICLE"^^xsd:string ;
+    rdfs:comment """Stationary non-ego vehicle, that might pose a risk to ego-vehicle or other road users."""@en .
+
+  drmh:ExceptionalConditionLowVisibility a drmh:HazardType ;
+    drmh:sensorisId "EXCEPTIONAL_CONDITION_LOW_VISIBILITY"^^xsd:string ;
+    rdfs:comment """Exceptional low visibility condition. Can be defined in more details within the message VisibilityCondition."""@en .
+
+  drmh:ExceptionalConditionPrecipitation a drmh:HazardType ;
+    drmh:sensorisId "EXCEPTIONAL_CONDITION_PRECIPITATION"^^xsd:string ;
+    rdfs:comment """Exceptional precipitation condition. Can be defined in more details within the message Precipitation."""@en .
+
+  drmh:ExceptionalConditionWind a drmh:HazardType ;
+    drmh:sensorisId "EXCEPTIONAL_CONDITION_WIND"^^xsd:string ;
+    rdfs:comment """Exceptional wind condition. Can be defined in more details within the message WindCondition."""@en .
+
+  drmh:ExceptionalConditionRoadSurface a drmh:HazardType ;
+    drmh:sensorisId "EXCEPTIONAL_CONDITION_ROAD_SURFACE"^^xsd:string ;
+    rdfs:comment """Exceptional road surface condition. Can be defined in more details within the message RoadSurfaceCondition."""@en .
+
+  drmh:ExceptionalConditionVulnerableRoadUser a drmh:HazardType ;
+    drmh:sensorisId "EXCEPTIONAL_CONDITION_VULNERABLE_ROAD_USER"^^xsd:string ;
+    rdfs:comment """Exceptional vulnerable road user condition. Can be defined in more details within the message VulnerableRoadUserCondition."""@en .
+
+  drmh:sensorisId a owl:DatatypeProperty ;
+    rdfs:label "Sensoris ID"@en ;
+    rdfs:comment "An optional ID mapping an invididual to its Sensoris counterpart."@en ;
+    rdfs:range xsd:string .
+
+  drmh:Direction a owl:Class ;
+    rdfs:label "Direction"@en .
+
+  drmh:EgoDirection a drmh:Direction ;
+    drmh:sensorisId "EGO_DIRECTION"^^xsd:string ;
+    rdfs:comment "In ego vehicle driving direction."@en .
+
+  drmh:OppositeDirection a drmh:Direction ;
+    drmh:sensorisId "OPPOSITE_DIRECTION"^^xsd:string ;
+    rdfs:comment "Opposite to ego vehicle driving direction."@en .
+
+  drmh:EgoAndOppositeDirection a drmh:Direction ;
+    drmh:sensorisId "BOTH"^^xsd:string ;
+    rdfs:comment "In and opposite to ego vehicle driving direction."@en .
+
+  drmh:Heading a owl:Class ;
+    rdfs:subClassOf drmh:Direction ;
+    rdfs:label "Heading"@en .
+
+  drmh:headingDegree a owl:DatatypeProperty ;
+    rdfs:domain drmh:Heading ;
+    rdfs:range xsd:double ;
+    rdfs:label "Heading"@en ;
+    rdfs:comment """Orientation of driving direction at time of event. A direction of 0 degree means north, 90 degree east, 180 degree south and 270 degree west.
+
+Granularity (Unit): 0.0125 (degree)
+
+Minimum value: 0.0°
+
+Maximum value: 360.0°"""@en .
+
+  drmh:direction a owl:ObjectProperty ;
+    rdfs:label "Direction"@en ;
+    rdfs:comment "Direction describes the direction or heading of the hazard."@en ;
+    rdfs:domain drmh:Hazard ;
+    rdfs:range drmh:Direction .
+
+  drmh:hazardType a owl:ObjectProperty ;
+    rdfs:label "Hazard Type"@en ;
+    rdfs:domain drmh:Hazard ;
+    rdfs:range drmh:HazardType .
+
+  drmh:confidence a owl:DatatypeProperty ;
+    rdfs:label "Confidence"@en ;
+    rdfs:domain drmh:Hazard ;
+    rdfs:range xsd:integer .
+}
+
+mbhs: {
+  mbhs:Hazard a sh:NodeShape ;
+    sh:targetClass drmh:Hazard ;
+    sh:property [
+      a sh:PropertyShape ;
+      sh:path drmh:direction ;
+      sh:maxCount 1
+    ] , [
+      a sh:PropertyShape ;
+      sh:path drmh:confidence ;
+      sh:minCount 1 ;
+      sh:maxCount 1 ;
+      sh:minInclusive 0 ;
+      sh:maxInclusive 100
+    ] , [
+      a sh:PropertyShape ;
+      sh:path drmh:hazardType ;
+      sh:maxCount 1
+    ] .
+
+  mbhs:Heading a sh:NodeShape ;
+    sh:targetClass drmh:Heading ;
+    sh:property [
+      a sh:PropertyShape ;
+      sh:path drmh:headingDegree ;
+      sh:minCount 1 ;
+      sh:maxCount 1 ;
+      sh:minInclusive 0.0 ;
+      sh:maxExclusive 360.0
+    ] .
+}
+
+mbh: {
+  mbh:HazardResource a ids:Resource ;
+    ids:title "Daimler Hazard Warnings"@en ;
+    ids:shapesGraph mbhs: ;
+    ids:representation mbh:HazardJsonRep .
+
+  mbh:HazardJsonRep a ids:DataRepresentation ;
+    ids:mediaType <https://www.iana.org/assignments/media-types/application/json> ;
+    idse:schemaMappingGraph mbh: ;
+    ids:instance mbh:HazardJsonArtifact .
+
+  mbh:HazardJsonArtifact a ids:DynamicArtifact ;
+    rdfs:comment "FIXME: The instance of the representation does not have any other attributes. It seems superfluous that way, except that the messaging system requires a representation."@en .
+
+  [] a rr:TriplesMap ;
+    rml:logicalSource [
+      rml:source mbh:HazardJsonArtifact ;
+      rml:referenceFormulation ql:JSONPath ;
+      rml:iterator "$.result[*]"
+    ] ;
+    rr:subjectMap [
+      rr:template "urn:hazards:daimler:hazard:{uuid}" ;
+      rr:class drmh:Hazard
+    ] ;
+    rr:predicateObjectMap [
+      rr:predicate drmh:direction ;
+      rr:objectMap [
+        rr:template "urn:hazards:daimler:heading:{uuid}" ;
+        rr:termType rr:IRI
+      ]
+    ] , [
+      rr:predicate drmh:confidence ;
+      rr:object "100"^^xsd:integer
+    ] .
+
+  [] a rr:TriplesMap ;
+    rml:logicalSource [
+      rml:source mbh:HazardJsonArtifact ;
+      rml:referenceFormulation ql:JSONPath ;
+      rml:iterator "$.result[?(@.cause=='Broken down vehicle')]"
+    ] ;
+    rr:subjectMap [
+      rr:template "urn:hazards:daimler:hazard:{uuid}"
+    ] ;
+    rr:predicateObjectMap [
+      rr:predicate drmh:hazardType ;
+      rr:object drmh:BrokenDownVehicle
+    ] .
+
+  [] a rr:TriplesMap ;
+    rml:logicalSource [
+      rml:source mbh:HazardJsonArtifact ;
+      rml:referenceFormulation ql:JSONPath ;
+      rml:iterator "$.result[?(@.cause=='Heavy rain')]"
+    ] ;
+    rr:subjectMap [
+      rr:template "urn:hazards:daimler:hazard:{uuid}"
+    ] ;
+    rr:predicateObjectMap [
+      rr:predicate drmh:hazardType ;
+      rr:object drmh:ExceptionalConditionPrecipitation
+    ] .
+
+  [] a rr:TriplesMap ;
+    rml:logicalSource [
+      rml:source mbh:HazardJsonArtifact ;
+      rml:referenceFormulation ql:JSONPath ;
+      rml:iterator "$.result[?(@.cause=='Slippery road')]"
+    ] ;
+    rr:subjectMap [
+      rr:template "urn:hazards:daimler:hazard:{uuid}"
+    ] ;
+    rr:predicateObjectMap [
+      rr:predicate drmh:hazardType ;
+      rr:object drmh:SlipperyRoad
+    ] .
+
+  [] a rr:TriplesMap ;
+    rdfs:comment "Generates the Heading resources a referenced by the Hazard resources."@en ;
+    rml:logicalSource [
+      rml:source mbh:HazardJsonArtifact ;
+      rml:referenceFormulation ql:JSONPath ;
+      rml:iterator "$.result.[*]"
+    ] ;
+    rr:subjectMap [
+      rr:template "urn:hazards:daimler:heading:{uuid}" ;
+      rr:class drmh:Heading
+    ] ;
+    rr:predicateObjectMap [
+      rr:predicate drmh:headingDegree ;
+      rr:objectMap [
+        rml:reference "heading" ;
+        rr:datatype xsd:integer
+      ]
+    ] .
+}
+
+idse: {
+  idse:DynamicArtifact a owl:Class ;
+    rdfs:subClassOf ids:RepresentationInstance ;
+    rdfs:label "dynamic artifact"@en ;
+    rdfs:comment "Instance of a Representation materialized through an I/O operation like a network request. FIXME: what about artifact request messages? How does one request another instance?"@en .
+
+  idse:schemaMappingGraph a owl:ObjectProperty ;
+    rdfs:domain ids:Representation ;
+    rdfs:range xsd:anyURI ;
+    rdfs:label "schema mapping graph"@en ;
+    rdfs:comment "Reference to an RML schema mapping graph which contains triple maps translating data from specific artifacts to RDF resources honoring the domain-specifics defined in a SHACL graph."@en .
+}

@@ -1,0 +1,93 @@
+@prefix ids: <https://w3id.org/idsa/core/> .
+@prefix idse: <https://w3id.org/idsa/ext/> .
+@prefix cond: <https://www.daimler.com/drm#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#>.
+@prefix rml: <http://semweb.mmlab.be/ns/rml#>.
+@prefix ql: <http://semweb.mmlab.be/ns/ql#>.
+@prefix drm: <https://datenraummobilitaet.de/model/core/v1#> .
+@prefix drmh: <https://datenraummobilitaet.de/model/hazard/v1#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+
+  cond:HazardJsonMapping a rr:TriplesMap ;
+    rml:logicalSource [
+      rml:source "/home/trueg/Daimler/dev/src/drm/InformationModel/examples/schema-mapping-to-rdf/hazard-daimler.json" ;
+      rml:referenceFormulation ql:JSONPath ;
+      rml:iterator "$.result[*]"
+    ] ;
+    rr:subjectMap [
+      rr:template "urn:hazards:daimler:hazard:{uuid}" ;
+      rr:class drmh:Hazard
+    ] ;
+    rr:predicateObjectMap [
+      rr:predicate drmh:direction ;
+      rr:objectMap [
+        rr:template "urn:hazards:daimler:heading:{uuid}" ;
+        rr:termType rr:IRI
+      ]
+    ] , [
+      rr:predicate drmh:confidence ;
+      rr:object "100"^^xsd:integer
+    ] .
+
+  [] a rr:TriplesMap ;
+    rml:logicalSource [
+      rml:source "/home/trueg/Daimler/dev/src/drm/InformationModel/examples/schema-mapping-to-rdf/hazard-daimler.json" ;
+      rml:referenceFormulation ql:JSONPath ;
+      rml:iterator "$.result[?(@.cause=='Broken down vehicle')]"
+    ] ;
+    rr:subjectMap [
+      rr:template "urn:hazards:daimler:hazard:{uuid}"
+    ] ;
+    rr:predicateObjectMap [
+      rr:predicate drmh:hazardType ;
+      rr:object drmh:BrokenDownVehicle
+    ] .
+
+  [] a rr:TriplesMap ;
+    rml:logicalSource [
+      rml:source "/home/trueg/Daimler/dev/src/drm/InformationModel/examples/schema-mapping-to-rdf/hazard-daimler.json" ;
+      rml:referenceFormulation ql:JSONPath ;
+      rml:iterator "$.result[?(@.cause=='Heavy rain')]"
+    ] ;
+    rr:subjectMap [
+      rr:template "urn:hazards:daimler:hazard:{uuid}"
+    ] ;
+    rr:predicateObjectMap [
+      rr:predicate drmh:hazardType ;
+      rr:object drmh:ExceptionalConditionPrecipitation
+    ] .
+
+  [] a rr:TriplesMap ;
+    rml:logicalSource [
+      rml:source "/home/trueg/Daimler/dev/src/drm/InformationModel/examples/schema-mapping-to-rdf/hazard-daimler.json" ;
+      rml:referenceFormulation ql:JSONPath ;
+      rml:iterator "$.result[?(@.cause=='Slippery road')]"
+    ] ;
+    rr:subjectMap [
+      rr:template "urn:hazards:daimler:hazard:{uuid}"
+    ] ;
+    rr:predicateObjectMap [
+      rr:predicate drmh:hazardType ;
+      rr:object drmh:SlipperyRoad
+    ] .
+
+  [] a rr:TriplesMap ;
+    rdfs:comment "Generates the Heading resources a referenced by the Hazard resources."@en ;
+    rml:logicalSource [
+      rml:source "/home/trueg/Daimler/dev/src/drm/InformationModel/examples/schema-mapping-to-rdf/hazard-daimler.json" ;
+      rml:referenceFormulation ql:JSONPath ;
+      rml:iterator "$.result.[*]"
+    ] ;
+    rr:subjectMap [
+      rr:template "urn:hazards:daimler:heading:{uuid}" ;
+      rr:class drmh:Heading
+    ] ;
+    rr:predicateObjectMap [
+      rr:predicate drmh:headingDegree ;
+      rr:objectMap [
+        rml:reference "heading" ;
+        rr:datatype xsd:integer
+      ]
+    ] .
